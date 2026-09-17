@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<link rel="stylesheet" href="{% static 'catalog/style.css' %}">
+</head>
+<body>
+  <header>
+    <h1>📚 Library Management System</h1>
+    <nav>
+      <button class="tab-btn active" data-tab="books">Books</button>
+      <button class="tab-btn" data-tab="members">Members</button>
+      <button class="tab-btn" data-tab="issues">Issue / Return</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- BOOKS TAB -->
+    <section id="books" class="tab-panel active">
+      <div class="panel-head">
+        <h2>Books</h2>
+        <input type="text" id="bookSearch" placeholder="Search by title, author, ISBN...">
+      </div>
+      <form id="bookForm" class="record-form">
+        <input type="hidden" id="bookId">
+        <input type="text" id="bookTitle" placeholder="Title" required>
+        <input type="text" id="bookAuthor" placeholder="Author" required>
+        <input type="text" id="bookIsbn" placeholder="ISBN (10 or 13 digits)" required>
+        <select id="bookCategory">
+          <option value="FIC">Fiction</option>
+          <option value="NF">Non-Fiction</option>
+          <option value="SCI">Science & Technology</option>
+          <option value="HIST">History</option>
+          <option value="BIO">Biography</option>
+          <option value="OTH">Other</option>
+        </select>
+        <input type="number" id="bookTotal" placeholder="Total copies" min="1" value="1" required>
+        <input type="number" id="bookAvailable" placeholder="Available copies" min="0" value="1" required>
+        <button type="submit" id="bookSubmitBtn">Add Book</button>
+        <button type="button" id="bookCancelBtn" class="secondary hidden">Cancel</button>
+      </form>
+      <div id="bookMsg" class="msg"></div>
+      <table>
+        <thead>
+          <tr><th>Title</th><th>Author</th><th>ISBN</th><th>Category</th><th>Available</th><th>Total</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="bookTableBody"></tbody>
+      </table>
+    </section>
+
+    <!-- MEMBERS TAB -->
+    <section id="members" class="tab-panel">
+      <div class="panel-head">
+        <h2>Members</h2>
+        <input type="text" id="memberSearch" placeholder="Search by name, email, phone...">
+      </div>
+      <form id="memberForm" class="record-form">
+        <input type="hidden" id="memberId">
+        <input type="text" id="memberName" placeholder="Full name" required>
+        <input type="email" id="memberEmail" placeholder="Email" required>
+        <input type="text" id="memberPhone" placeholder="Phone (10 digits)" required>
+        <button type="submit" id="memberSubmitBtn">Add Member</button>
+        <button type="button" id="memberCancelBtn" class="secondary hidden">Cancel</button>
+      </form>
+      <div id="memberMsg" class="msg"></div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="memberTableBody"></tbody>
+      </table>
+    </section>
+
+    <!-- ISSUES TAB -->
+    <section id="issues" class="tab-panel">
+      <h2>Issue a Book</h2>
+      <form id="issueForm" class="record-form">
+        <select id="issueBook" required></select>
+        <select id="issueMember" required></select>
+        <input type="date" id="issueDueDate" required>
+        <button type="submit">Issue Book</button>
+      </form>
+      <div id="issueMsg" class="msg"></div>
+      <h2>Issue Records</h2>
+      <table>
+        <thead>
+          <tr><th>Book</th><th>Member</th><th>Issue Date</th><th>Due Date</th><th>Return Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="issueTableBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="{% static 'catalog/script.js' %}"></script>
+</body>
+</html>
